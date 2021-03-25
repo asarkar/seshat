@@ -1,8 +1,10 @@
 package com.asarkar.seshat.persistence
 
+import javax.persistence.CascadeType
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
+import javax.persistence.JoinColumn
 import javax.persistence.OneToMany
 import javax.persistence.Table
 import javax.persistence.UniqueConstraint
@@ -12,10 +14,10 @@ import javax.persistence.UniqueConstraint
 data class Project(
     @Id
     @GeneratedValue
-    // Mutable because the DB has to set it
-    var id: Long = 0,
+    val id: Long = 0,
     val name: String,
-    @OneToMany
+    @OneToMany(cascade = [CascadeType.ALL])
+    @JoinColumn(name = "project_id")
     val testSuites: List<TestSuites>
 )
 
@@ -24,14 +26,14 @@ data class Project(
 data class TestSuites(
     @Id
     @GeneratedValue
-    // Mutable because the DB has to set it
-    var id: Long = 0,
+    val id: Long = 0,
     val name: String? = null,
     val tests: Int = 0,
     val failures: Int = 0,
     val errors: Int = 0,
     val disabled: Int = 0,
-    @OneToMany
+    @OneToMany(cascade = [CascadeType.ALL])
+    @JoinColumn(name = "test_suites_id")
     val testSuites: List<TestSuite>
 )
 
@@ -40,15 +42,15 @@ data class TestSuites(
 data class TestSuite(
     @Id
     @GeneratedValue
-    // Mutable because the DB has to set it
-    var id: Long = 0,
+    val id: Long = 0,
     val name: String,
     val tests: Int,
     val failures: Int = 0,
     val errors: Int = 0,
     val disabled: Int = 0,
-    val `package`: String? = null,
-    @OneToMany
+    val pkg: String? = null,
+    @OneToMany(cascade = [CascadeType.ALL])
+    @JoinColumn(name = "test_suite_id")
     val testCases: List<TestCase>
 )
 
@@ -57,9 +59,8 @@ data class TestSuite(
 data class TestCase(
     @Id
     @GeneratedValue
-    // Mutable because the DB has to set it
-    var id: Long = 0,
+    val id: Long = 0,
     val name: String,
-    val `class`: String? = null,
+    val classname: String? = null,
     val status: String? = null
 )

@@ -5,7 +5,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 @MicronautTest(
-    propertySources = ["persistence.yml"],
+    propertySources = ["classpath:persistence.yml"],
     transactional = false
 )
 class ProjectRepositoryTest(private val projectRepository: ProjectRepository) {

@@ -25,7 +25,6 @@ subprojects {
     }
 
     dependencies {
-        implementation(kotlin("stdlib-jdk8"))
         implementation(kotlin("reflect"))
         implementation("io.micronaut.kotlin:micronaut-kotlin-extension-functions")
         runtimeOnly("ch.qos.logback:logback-classic")
