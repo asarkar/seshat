@@ -1,0 +1,9 @@
+jpa:
+  default:
+    entity-scan.packages: com.asarkar.seshat.persistence
+    properties.hibernate:
+      hbm2ddl.auto: create-drop
+      show_sql: true
+      dialect: org.hibernate.dialect.H2Dialect
+logger.levels:
+  io.micronaut.context.condition: DEBUG
